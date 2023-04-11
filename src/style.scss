@@ -1,0 +1,12 @@
+.external-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--orange);
+  font-weight: 300;
+}
+.external-link-arrow {
+  font-size: 1.5em;
+}

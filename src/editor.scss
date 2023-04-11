@@ -1,0 +1,6 @@
+.editor-styles-wrapper a.external-link:where(:not(.wp-element-button)) {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  text-transform: uppercase;
+}
