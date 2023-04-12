@@ -6,7 +6,19 @@
   text-transform: uppercase;
   color: var(--wp--preset--color--orange);
   font-weight: 300;
+  gap: .3em;
 }
 .external-link-arrow {
-  font-size: 1.5em;
+  font-size: 1.2em;
+  transition: transform .2s ease-in-out;
+  transform: translateX(0);
+}
+.external-link:hover .external-link-arrow {
+  transform: translateX(.2em);
+}
+.woodoo-post-meta-links {
+  display: flex;
+  gap: 10px;
+  font-size: clamp(12px, .85vw, 1rem);
+  justify-content: space-between;
 }

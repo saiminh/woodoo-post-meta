@@ -29,15 +29,18 @@ function render_woodoo_post_meta() {
   $content = '';
   if ( $externalLink != '' ) {
     $link = $meta['site_externe'][0];
-    $content = '<div class="external-link-container"><a href="'.$link.'" class="external-link"><span class="external-link-words">Go to link</span><span class="external-link-arrow"> -> </span></a></div>';
+    $content = '<div class="external-link-container"><a href="'.$link.'" class="external-link" target="_blank"><span class="external-link-words">Read article</span><span class="external-link-arrow"> -> </span></a></div>';
   }
   if ( isset( $meta['filepdf'][0]) && $meta['filepdf'][0] != '' ) {
     $attachment = wp_get_attachment_url( $meta['filepdf'][0] );
-    $content = $content.'<div class="external-link-container"><a href="'.$attachment.'" class="external-link"><span class="external-link-words">Read more</span><span class="external-link-arrow"> -> </span></a></div>';
+    $content = $content.'<div class="external-link-container"><a href="'.$attachment.'" class="external-link"><span class="external-link-words">PDF</span><span class="external-link-arrow"> -> </span></a></div>';
   }
   if ( $video != '' ) {
     $content = $content.'<div class="external-link-container"><a href="'.$video.'" class="external-link"><span class="external-link-words">Watch</span><span class="external-link-arrow"> -> </span></a></div>';
   }
+
+  $content = '<div class="woodoo-post-meta-links">'.$content.'</div>';
+
   return $content;
 }
 function create_block_woodoo_post_meta_block_init() {
