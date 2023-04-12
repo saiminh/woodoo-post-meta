@@ -41,7 +41,7 @@ export default function Edit(
         </a>
         <TextControl
           label="Set external link url:"
-          value={ meta['site_externe'] }
+          value={ site_externe }
           onChange={ ( newValue ) => {
             updateMeta( {
               ...meta,
