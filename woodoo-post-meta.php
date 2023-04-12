@@ -21,13 +21,22 @@
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 
- function render_woodoo_post_meta() {
+function render_woodoo_post_meta() {
   $id = get_the_ID();
   $meta = get_metadata( 'post', $id );
+  $externalLink = $meta['site_externe'][0];
+  $video = $meta['file_video'][0];
   $content = '';
-  if ( isset($meta['site_externe'][0]) ) {
+  if ( $externalLink != '' ) {
     $link = $meta['site_externe'][0];
-    $content = '<div class="external-link-container"><a href="'.$link.'" class="external-link"><span class="external-link-words">Read more</span><span class="external-link-arrow"> -> </span></a></div>';
+    $content = '<div class="external-link-container"><a href="'.$link.'" class="external-link"><span class="external-link-words">Go to link</span><span class="external-link-arrow"> -> </span></a></div>';
+  }
+  if ( isset( $meta['filepdf'][0]) && $meta['filepdf'][0] != '' ) {
+    $attachment = wp_get_attachment_url( $meta['filepdf'][0] );
+    $content = $content.'<div class="external-link-container"><a href="'.$attachment.'" class="external-link"><span class="external-link-words">Read more</span><span class="external-link-arrow"> -> </span></a></div>';
+  }
+  if ( $video != '' ) {
+    $content = $content.'<div class="external-link-container"><a href="'.$video.'" class="external-link"><span class="external-link-words">Watch</span><span class="external-link-arrow"> -> </span></a></div>';
   }
   return $content;
 }
@@ -41,6 +50,16 @@ add_action( 'init', 'create_block_woodoo_post_meta_block_init' );
 // register custom meta tag field
 function register_post_meta_posts() {
   register_post_meta( 'post', 'site_externe', array(
+      'show_in_rest' => true,
+      'single' => true,
+      'type' => 'string'
+  ) );
+  register_post_meta( 'post', 'file_video', array(
+      'show_in_rest' => true,
+      'single' => true,
+      'type' => 'string'
+  ) );
+  register_post_meta( 'post', 'filepdf', array(
       'show_in_rest' => true,
       'single' => true,
       'type' => 'string'
