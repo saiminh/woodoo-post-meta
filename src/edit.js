@@ -57,7 +57,7 @@ export default function Edit(
           onSelect = {
             ( el ) => {
                 let newId;
-                el.id ? newId = el.id.toString() : newId = el;
+                el.id ? newId = el.id.toString() : newId = 'Uploading...';
                 updateMeta( {
                 ...meta,
                 filepdf: newId
@@ -65,10 +65,10 @@ export default function Edit(
             }
           }
           multiple = { false }
-          labels = { { title: 'Attachment ID: ' + meta['filepdf'], instructions: 'Upload or choose a PDF from the Media Library' } }
+          labels = { { title: filepdf ? 'Attachment ID: ' + filepdf : 'No PDF', instructions: 'Upload or choose a PDF from the Media Library' } }
         >
         </MediaPlaceholder>
-        <a onClick={ () => {  updateMeta( { ...meta, filepdf: ''}) }}>Remove PDF</a>
+        <a className='remove-value' onClick={ () => {  updateMeta( { ...meta, filepdf: ''}) }}>Remove PDF</a>
         <MediaPlaceholder
           key={2}
           icon={ 'video-alt3' }
@@ -82,10 +82,20 @@ export default function Edit(
             }
           }
           multiple = { false }
-          labels = { { title: meta['file_video'], instructions: 'Upload or choose a video from the Media Library' } }
+          labels = { { title: file_video ? file_video : `No Video`, instructions: 'Upload or choose a video from the Media Library' } }
         >
         </MediaPlaceholder>
-        <a onClick={ () => {  updateMeta( { ...meta, file_video: ''}) }}>Remove Video</a>
+        <TextControl
+          label="Or set external Video url:"
+          value={ file_video }
+          onChange={ ( newValue ) => {
+            updateMeta( {
+              ...meta,
+              file_video: newValue
+            } )
+          } }
+        />
+        <a className='remove-value' onClick={ () => {  updateMeta( { ...meta, file_video: ''}) }}>Remove Video</a>
       </div>
     );
   }
