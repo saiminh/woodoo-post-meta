@@ -56,7 +56,8 @@ export default function Edit(
           allowedTypes={[ 'application/pdf' ]}
           onSelect = {
             ( el ) => {
-                const newId = el.id.toString();
+                let newId;
+                el.id ? newId = el.id.toString() : newId = el;
                 updateMeta( {
                 ...meta,
                 filepdf: newId
